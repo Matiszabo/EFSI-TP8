@@ -34,10 +34,10 @@ const Home = () => {
       const timer = setInterval(() => {
         setTiempo((prevTiempo) => prevTiempo - 1);
       }, 1000);
-
+  
       return () => clearInterval(timer);
-    } else {
-      procesarRespuesta();
+    } else if (tiempo === 0) {
+      procesarRespuesta(); // Esto garantiza que la respuesta se procese solo una vez
     }
   }, [tiempo]);
 
@@ -51,9 +51,9 @@ const Home = () => {
 
   const procesarRespuesta = () => {
     if (respuestaUsuario.toLowerCase() === paisSeleccionado.name.toLowerCase()) {
-      setPuntos((prevPuntos) => Math.max(prevPuntos + 10, 0)); // Añadir puntos y asegurarse de que no haya puntuaciones negativas
+      setPuntos((prevPuntos) => Math.max(prevPuntos + 10, 0)); // Añadir puntos y asegurar que no haya puntuaciones negativas
     } else {
-      setPuntos((prevPuntos) => Math.max(prevPuntos - 1, 0)); // Restar puntos y asegurarse de que no haya puntuaciones negativas
+      setPuntos((prevPuntos) => Math.max(prevPuntos - 1, 0)); // Restar puntos y asegurar que no haya puntuaciones negativas
     }
     setRespuestaUsuario('');
     setAyuda(''); // Limpiar la pista después de procesar la respuesta
